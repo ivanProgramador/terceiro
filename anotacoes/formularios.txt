@@ -1,0 +1,3 @@
+Um parte muito imortante de um sistema são seus formularios como se tratad eum framework 
+que lida com bases de dados esse formularios precisam de sistemas de segurança e o tratamento 
+dos dados precisa ser feito antes que esses sejam  registrados  nas bases de dados. 
