@@ -7,16 +7,25 @@ use Illuminate\Http\Request;
 class Main extends Controller
 {
 
-    //mostrando o formulario 
+ //==============================================================//   
     public function formulario(){
 
+    
         return view('formulario');
+
     }
 
 
-    //tratando os dados vindos do formulário
 
-    public function submissao(){
+
+    
+//===============================================================//
+
+// Essa função tem uma assinatura tradicional pra controlar as requisições
+// com isso o   
+    public function submissao(Request $request){
+     
+
 
         
     }

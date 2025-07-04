@@ -6,8 +6,10 @@
      <div class="row">
           <div class="col-md-4 offset-md-4 ">
              
+               <!-- isso é uma dretiva de segurança do lavael nenum formulario funciona sem ela -->
+                @@csrf
 
-               <form action="" method="post">
+               <form action="{{ route('/sumissao')}}" method="post">
 
                       <div class="mb-3">
                             <label for="text_produto" class="form-label">Produto:</label>
