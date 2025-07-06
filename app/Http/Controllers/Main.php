@@ -49,10 +49,15 @@ class Main extends Controller
             'text_produto'=>'required| min:3|max:10',
             'text_marca' =>'required|max:10'
         ],
-        //mensagens de erro 
+        //mensagens de erro personalizadas, como não existem apenas regras de preenchimento
+        // o tamanho ddo dadoss tem que ser validado, então eu posso personalizar as mensagens de erro
+        //para cada regra de validação, eu posso informar uma mensagem de erro personalizada 
+        //existem varios ti´pos de validação, como por exemplo: email, url, date, entre outros
         [
             'text_produto.required' => 'Você esqueceu de informar o produto',
             'text_marca.required' => 'Você esqueceu de informar a marca',
+            'text_produto.min' => 'O produto deve ter no mínimo 3 caracteres',
+            'text_produto.max' => 'O produto deve ter no máximo 10 caracteres',
 
 
         ]
