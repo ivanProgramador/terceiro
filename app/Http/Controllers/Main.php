@@ -63,6 +63,39 @@ class Main extends Controller
         ]
     );
    
+
+
+    
  }
+
+
+
+ //upload de ficheiros
+
+  public function upload(){
+
+    ///formulario de upload
+    return view('upload');
+   
+
+  }
+
+    public function upload_submissao(Request $request){
+    
+        //validação do ficheiro e upload 
+
+
+    
+        $request->file('ficheiro')->store('uploads');
+    
+    }
+  
+
+
+
+ 
+
+
+
 
 }

@@ -41,7 +41,107 @@ Regras de validação de dados
         ]
     );
 
-mensagens de feedback avisando a o cliente oque está errado
+mensagens de feedback avisando a o cliente oque está errado existe u,m integração back/front 
+nessse caso onde o blde recebe uma variavel padrão  chamada errors, quando a requissição e acionada
+ele vai para o controller e busca pela função validate qua pode ter parametros ou não mas se ela tiver 
+ele vai ler e verificar sse tem alguma condição dentro dela que não foi atendida, se tiver ele busca o 
+outro parametro que seria um array com as menssagens personalizadas.
+
+isso fica dentro do controller no metdo que recebe a requisição 
+
+$request->validate(
+        [
+            'text_produto'=>'required| min:3|max:10',
+            'text_marca' =>'required|max:10'
+        ],
+        //mensagens de erro personalizadas, como não existem apenas regras de preenchimento
+        // o tamanho ddo dadoss tem que ser validado, então eu posso personalizar as mensagens de erro
+        //para cada regra de validação, eu posso informar uma mensagem de erro personalizada 
+        //existem varios ti´pos de validação, como por exemplo: email, url, date, entre outros
+        [
+            'text_produto.required' => 'Você esqueceu de informar o produto',
+            'text_marca.required' => 'Você esqueceu de informar a marca',
+            'text_produto.min' => 'O produto deve ter no mínimo 3 caracteres',
+            'text_produto.max' => 'O produto deve ter no máximo 10 caracteres',
+
+
+        ]
+    );
+
+uma vez que ekle encontra um parametro qe não foi atendido ele volta com o array tento que pra mostrar as notificações 
+eu uso um loop dentro da view
+
+isso fica acima do formulario 
+
+            @if($errors -> any())
+
+                 <div class="alert alert-danger p-2 mb-3">
+
+                    @foreach($errors->all() as $mensagen_errors)
+                      
+                       <p>{{ $mensagen_errors }}</p>
+                        
+                    @endforeach
+
+                   </div>
+                 @endif
+
+Armazenando ficheiros 
+Alguns sistemas tem a necessidade de guardar arquivos, mas porpadrão o laravel não salav nada, na pasta public
+deve ser alguma diretiva de segurança, pra gravar isso foi criada uma pasta ficheiros dentro da pasta public
+da raiz mesmo. 
+
+dentro da pasta storage tem a pasta "app/public" eu vou ligar as duas  
+
+    php artisan storage:link
+
+A resposta vai ser essa, isso signica que ele ligou as duas 
+
+    [C:\xampp\htdocs\terceiro\public\storage] link has been connected to [C:\xampp\htdocs\terceiro\storage\app/public].
+
+nisso ele vai gerar um diretorio storage dentro da minha pasta public, que funcionará como um clone da sstorage ondde ele 
+guarda os arquivos. nissso trudo que for criado dentro da pasta storage/public vai aparecer dentro da pasta storage/app/public
+e ai sim ele vai gravar porque ele não gurada na public mas quando se tem um clone da pasta onde ele guarda ele vai gravar.
+
+testando se deu certo
+
+1 - criei um arquivo txt e salvei dentro da pasta "public/storage" qua foi a apasta clone criada pelo artisan 
+2 - verfiquei a pasta storage/app/public e eo arquivo foi replicado lá 
+
+para desligar e so apagar a pasta clone
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://laravel.com/docs/12.x/filesystem#temporary-upload-urls
+
+
+
+
 
 
 
