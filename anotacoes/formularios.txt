@@ -1,3 +1,56 @@
-Um parte muito imortante de um sistema são seus formularios como se tratad eum framework 
-que lida com bases de dados esse formularios precisam de sistemas de segurança e o tratamento 
-dos dados precisa ser feito antes que esses sejam  registrados  nas bases de dados. 
+Formularios
+    Um parte muito importante de um sistema são seus formularios como se tratad eum framework 
+    que lida com bases de dados esse formularios precisam de sistemas de segurança e o tratamento 
+    dos dados precisa ser feito antes que esses sejam  registrados  nas bases de dados. 
+
+Dados vindos dos inputs(campos)
+
+    A rota "/submissao" recebe os dados e manda eles para o metodo de mesmo nome  que esta dentro do controller  
+
+1 -  Route::post('/submissao',[Main::class, 'submissao'])->name('submissao'); 
+
+
+    a função submissao recebe como parametro uma variavel $request ela pode ter qualquer nome 
+    o importante e ela herdar  a classe Request pra que ela tenha os metodos pra taratar a requisição. 
+
+2 - public function submissao(Request $request)
+    {
+      
+      Aqui eu mostro os dados que vieram da requisição mas ela também vai mostrar o token
+      de segurança, que é gerado para o laravel saber quem foi que fez o pedido.   
+      
+       echo'<pre>';
+       print_r($request->input());
+   
+     }
+
+Regras de validação de dados 
+
+   a função validade recebe um array e dentro dele as regra de validação são definidas 
+   primeiro eu informo o campo e depois eu associoa a ele as regras por exemplo 
+   o campo text_produto não aceita uma string menor que 3 caracterese maior que 10 caracteres
+   a função não vai travar o servidor se ela não for atendida ela vai redirecionar o usuario 
+   de volta ao formulario 
+   a sintaxe das regas esta em  https://laravel.com/docs/12.x/validation
+      
+
+    $request->validate(
+        [
+            'text_produto'=>'required| min:3|max:10',
+            'text_marca' =>'required|max:10'
+        ]
+    );
+
+mensagens de feedback avisando a o cliente oque está errado
+
+
+
+
+
+
+
+
+
+
+ 
+   
