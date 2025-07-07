@@ -1,0 +1,58 @@
+Um sessão armazena os dados do usuário  e esses dados ficam salvos na poagina para que ele não precise 
+colocar login e senha todo vez que ele passa de uma apágina a outra da aplicação.
+para ver os dados de uma sessão no laravel tem que usar o codigo abaixo:
+
+ echo"<pre>";
+    print_r($request->session()->all());
+
+No caso ele vai retornar um array com os dados da sessão, mas é possivel retornar json ou outros formatos.
+inserindo dados em uma sessão 
+
+     $request->session()->put('usuario', 'João');
+
+nesse caso eu estu dizendo que existe um usuario não necessariamente logado, mas o nome dele e joão 
+e ele tem um sesssão iniciada. fazendo a exibição dessa sessão com print_r:
+
+Array
+(
+    [_token] => A4Snnz7jC4uU1hhyWkSeWwHZuwfP0H9YDhGr7Ppw
+    [_previous] => Array
+        (
+            [url] => http://localhost/terceiro/public/sessao
+        )
+
+    [_flash] => Array
+        (
+            [old] => Array
+                (
+                )
+
+            [new] => Array
+                (
+                )
+
+        )
+
+    [usuario] => João
+)
+
+o usuario joão aparece , mas ele poderia ser  [cliente] => João , [visitante]=>João, quem deifine é a regra de negocio,
+inserindo mais dados
+
+$request->session()->put(
+        ['usuario' => 'João', 
+          'cargo' =>'administrador',
+          'email' => 'joao@teste.com'
+        ]
+    ); 
+
+
+
+pegando apenas o usuario 
+
+ print_r($request->session()->get('usuario'));
+
+ 
+
+
+

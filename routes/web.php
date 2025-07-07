@@ -14,5 +14,10 @@ Route::get('/upload',[Main::class, 'upload'])->name('upload');
 
 Route::post('/upload_submissao',[Main::class, 'upload_submissao'])->name('upload_submissao');
 
+//sessão 
+
+Route::get('/sessao',[Main::class,'sessao']);
+Route::get('/ver_sessao',[Main::class,'ver_sessao']);
+
 
  

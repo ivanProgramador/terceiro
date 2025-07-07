@@ -7,6 +7,7 @@ use PhpParser\Node\Stmt\Else_;
 use Illuminate\Support\Facades\Storage;
 
 class Main extends Controller
+
 {
 
  //==============================================================//   
@@ -81,7 +82,7 @@ class Main extends Controller
 
   }
 
-    public function upload_submissao(Request $request){
+   public function upload_submissao(Request $request){
     
         //validação do ficheiro e upload
         //nessa validdação eu estou informando que o campo ficheiro é obrigatório
@@ -116,6 +117,38 @@ class Main extends Controller
 
     
     }
+
+
+
+
+
+
+//===============================================================//
+ public function sessao(Request $request){
+    
+    //inserindo dados na sessão
+    $request->session()->put(
+        ['usuario' => 'João', 
+          'cargo' =>'administrador',
+          'email' => 'joao@teste.com'
+        ]
+    );
+
+    
+   
+ }
+
+ public function ver_sessao(Request $request){
+
+   //ver os dados da sessão
+   // Exemplo: echo session data (opcional)
+   // echo json_encode($request->session()->all());
+
+    echo"<pre>";
+    print_r($request->session()->get('usuario'));
+ }
+
+
   
 
 
@@ -124,5 +157,9 @@ class Main extends Controller
 
 
 
+
+  
+
+  
 
 }
