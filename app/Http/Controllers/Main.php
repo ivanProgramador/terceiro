@@ -82,11 +82,33 @@ class Main extends Controller
 
     public function upload_submissao(Request $request){
     
-        //validação do ficheiro e upload 
+        //validação do ficheiro e upload
+        //nessa validdação eu estou informando que o campo ficheiro é obrigatório
+        //e que ele deve ser um ficheiro do tipo jpg, png ou jpeg
+        //a função validate vai verificar se o ficheiro é do tipo correto e se ele foi
+        //enviado corretamente, se não for o caso ela vai redirecionar o usuario  
+        //required significa que o campo é obrigatório
+        //file significa que o campo deve ser um ficheiro
+        //mimes significa que o arquivo de imagem  deve ser do tipo jpg, png ou jpeg
+        //max significa que o arquivo de imagem não pode ser maior que 100kb
+        //dimensions significa que a imagem deve ter uma largura mínima de 100px e uma altura mínima de 100px
 
 
     
-        $request->file('ficheiro')->store('uploads');
+        $validacao = $request->validate([
+
+            'ficheiro'=>'required|file|mimes:jpg,png,jpeg|max:100|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'
+        ],
+        [
+             'ficheiro.required' => 'Você esqueceu de secionar uma imagem',
+             'ficheiro.file' => 'O aquivo deve ser uma imagem',
+             'ficheiro.mimes' => 'O arquivo  deve ser do tipo jpg, png ou jpeg',
+             'ficheiro.max' => 'O arquivo não pode ser maior que 100kb',
+             'ficheiro.dimensions' => 'A imagem deve ter uma largura mínima de 100px e uma altura mínima de 100px, e uma largura máxima de 1000px e uma altura máxima de 1000px',       
+
+        ]);
+
+        
     
     }
   
