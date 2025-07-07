@@ -29,6 +29,10 @@ return [
     */
 
     'disks' => [
+        'ficheiros'=>[
+            'driver'=>'local',
+            'root'=> public_path() . '/ficheiros'
+        ],
 
         'local' => [
             'driver' => 'local',

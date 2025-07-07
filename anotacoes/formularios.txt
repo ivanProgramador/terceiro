@@ -137,6 +137,9 @@ para desligar e so apagar a pasta clone
 
 
 
+
+
+
 https://laravel.com/docs/12.x/filesystem#temporary-upload-urls
 
 

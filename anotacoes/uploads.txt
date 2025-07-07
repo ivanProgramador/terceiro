@@ -1,0 +1,84 @@
+Quando se usa um formulario para fazer uploads de imagens ou arquivos 
+é possivel fazer a validação de qua tipoa de arquivos o formulario aceita.
+
+ $validacao = $request->validate([
+
+            'ficheiro'=>'required|file|mimes:jpg,png,jpeg|max:100|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'
+        ],
+        [
+             'ficheiro.required' => 'Você esqueceu de secionar uma imagem',
+             'ficheiro.file' => 'O aquivo deve ser uma imagem',
+             'ficheiro.mimes' => 'O arquivo  deve ser do tipo jpg, png ou jpeg',
+             'ficheiro.max' => 'O arquivo não pode ser maior que 100kb',
+             'ficheiro.dimensions' => 'A imagem deve ter uma largura mínima de 100px e uma altura mínima de 100px, e uma largura máxima de 1000px e uma altura máxima de 1000px',       
+
+        ]);
+
+se a avaliddação for bem sucedida essa imagem sera salva em storage/app/arquivos 
+caso não exista a pasta arquivos ela será criada automaticamente
+a função store recebe o nome da pasta onde o arquivo será salvo
+ela também pode receber o nome do arquivo, mas nesse caso o nome do arquivo será
+gerado automaticamente pelo laravel, o nome do arquivo será um hash do arquivo
+e o nome do arquivo será salvo no banco de dados, caso exista um banco de dados
+se não existir um banco de dados o arquivo será salvo apenas no sistema de arquivos
+      
+       $request->file('ficheiro')->store('arquivos');  
+
+tambem tem essa possbilidade de usar a classe Storage
+a classe Storage tem varios metodos para manipular arquivos, como por exemplo: put
+putFileAs, put, get, delete, entre outros
+o metodo putFileAs recebe o caminho onde o arquivo vai ser salvo, o arquivo
+e o nome do arquivo, nesse caso eu estou salvando o arquivo na pasta public
+arquivos com o nome documento_xt.pdf    
+
+     Storage::putFileAs('public/arquivos',$request->file('ficheiro'),'documento_xt.pdf');
+
+Agora eu não quero mais gravar os arquivos na pasta padrão então eu vou configurar o path 
+exite um arquivo dentro da pasta config que se chama filesystems.php 
+funciona como um ini de configuração dos sistemas de armazenamento do laravel 
+lá tem um vetor associativo que recebe varios dados de configuração então  
+eu vou fazer o meu no meu caso o driver e local e a apasta seria a ficheiros 
+a afunção public path avisa que eu estou falado da pasta public que esta na raiz 
+e não da asta public que fica dentro do app.   
+
+
+
+ 'disks' => [
+        'ficheiros'=>[
+            'driver'=>'local',
+            'root'=> public_path() . '/ficheiros'
+        ],
+
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private'),
+            'serve' => true,
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+            'report' => false,
+        ],
+
+    ]
+
+

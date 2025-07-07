@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Else_;
+use Illuminate\Support\Facades\Storage;
 
 class Main extends Controller
 {
@@ -108,7 +109,11 @@ class Main extends Controller
 
         ]);
 
-        
+        //agora eu quero gurdar na pasta public/arquivos o ficheiro que foi enviado
+
+        $request->file('ficheiro')->storeAs('','novo_ficheiro.pdf',['disk'=>'ficheiros']);
+
+
     
     }
   
